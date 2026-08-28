@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useMemo, useState } from "react";
 import { Sparkles } from "lucide-react";
@@ -96,6 +96,9 @@ export function UploadPanel() {
 
   const [answerSheetFiles, setAnswerSheetFiles] =
     useState<UploadedFile[]>([]);
+
+  const [mobileReviewTab, setMobileReviewTab] =
+    useState<"questions" | "answers">("questions");
 
   const [processingState, setProcessingState] =
     useState<ProcessingState>("idle");
@@ -858,7 +861,7 @@ export function UploadPanel() {
 
             <label
               htmlFor="question-paper-upload"
-              className="block cursor-pointer rounded-xl border border-dashed bg-muted/20 p-5 transition hover:bg-muted/40"
+             className="block cursor-pointer rounded-xl border border-dashed bg-muted/20 p-5 transition hover:bg-muted/40"
             >
               <div className="flex flex-col items-center justify-center text-center">
                 <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-full border bg-white">
@@ -1285,12 +1288,46 @@ export function UploadPanel() {
             </div>
           </div>
 
-          {/* Main review workspace */}
+          {/* Mobile review tabs */}
 
-          <div className="grid overflow-hidden rounded-3xl border border-black/10 bg-white shadow-[0_8px_30px_rgba(0,0,0,0.04)] lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+<div className="flex rounded-xl border bg-[#fafafa] p-1 lg:hidden">
+  <button
+    type="button"
+    onClick={() => setMobileReviewTab("questions")}
+    className={`flex-1 rounded-lg px-3 py-2.5 text-sm font-medium transition ${
+      mobileReviewTab === "questions"
+        ? "bg-white text-black shadow-sm"
+        : "text-muted-foreground"
+    }`}
+  >
+    Questions
+  </button>
+
+  <button
+    type="button"
+    onClick={() => setMobileReviewTab("answers")}
+    className={`flex-1 rounded-lg px-3 py-2.5 text-sm font-medium transition ${
+      mobileReviewTab === "answers"
+        ? "bg-white text-black shadow-sm"
+        : "text-muted-foreground"
+    }`}
+  >
+    Answer Sheet
+  </button>
+</div>
+
+{/* Main review workspace */}
+
+<div className="grid overflow-hidden rounded-3xl border border-black/10 bg-white lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
             {/* Question mapping */}
 
-            <div className="min-w-0 border-b border-black/10 lg:border-b-0 lg:border-r">
+            <div
+  className={`min-w-0 border-b border-black/10 lg:border-b-0 lg:border-r ${
+    mobileReviewTab === "questions"
+      ? "block"
+      : "hidden lg:block"
+  }`}
+>
               <div className="border-b border-black/10 bg-[#fafafa] px-5 py-4">
                 <div className="flex items-center justify-between gap-3">
                   <div>
@@ -1450,7 +1487,13 @@ export function UploadPanel() {
 
             {/* Answer sheet */}
 
-            <div className="min-w-0 bg-[#fafafa]">
+            <div
+  className={`min-w-0 bg-[#fafafa] ${
+    mobileReviewTab === "answers"
+      ? "block"
+      : "hidden lg:block"
+  }`}
+>
               <div className="border-b border-black/10 bg-white px-5 py-4">
                 <div className="flex items-center justify-between gap-3">
                   <div>
@@ -1627,7 +1670,7 @@ export function UploadPanel() {
                 </p>
 
                 <span className="flex h-7 w-7 items-center justify-center rounded-full bg-green-100 text-sm font-semibold text-green-700">
-                  ✓
+                  âœ“
                 </span>
               </div>
 
@@ -1649,7 +1692,7 @@ export function UploadPanel() {
                 </p>
 
                 <span className="flex h-7 w-7 items-center justify-center rounded-full bg-yellow-100 text-sm font-semibold text-yellow-700">
-                  ◐
+                  â—
                 </span>
               </div>
 
@@ -1671,7 +1714,7 @@ export function UploadPanel() {
                 </p>
 
                 <span className="flex h-7 w-7 items-center justify-center rounded-full bg-red-100 text-sm font-semibold text-red-700">
-                  ×
+                  Ã—
                 </span>
               </div>
 
@@ -1693,7 +1736,7 @@ export function UploadPanel() {
                 </p>
 
                 <span className="flex h-7 w-7 items-center justify-center rounded-full border bg-white text-xs font-semibold text-muted-foreground">
-                  —
+                  â€”
                 </span>
               </div>
 
@@ -1809,7 +1852,7 @@ export function UploadPanel() {
               <div className="rounded-2xl border border-green-200 bg-green-50/40 p-5">
                 <div className="flex items-center gap-2">
                   <span className="flex h-7 w-7 items-center justify-center rounded-full bg-green-100 text-sm font-semibold text-green-700">
-                    ✓
+                    âœ“
                   </span>
 
                   <p className="text-xs font-semibold uppercase tracking-[0.12em] text-green-700">
@@ -1868,7 +1911,7 @@ export function UploadPanel() {
             <div className="mt-4 rounded-2xl border border-black/10 bg-white p-5">
               <div className="flex items-center gap-2">
                 <span className="flex h-7 w-7 items-center justify-center rounded-lg border bg-[#fafafa] text-xs font-semibold">
-                  →
+                  â†’
                 </span>
 
                 <p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
@@ -2352,7 +2395,7 @@ export function UploadPanel() {
         <div className="rounded-2xl border bg-white p-5 shadow-sm">
           <div className="flex items-center gap-3">
             <div className="flex h-9 w-9 items-center justify-center rounded-full bg-green-100 text-green-700">
-              ✓
+              âœ“
             </div>
 
             <div>
