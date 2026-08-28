@@ -1163,56 +1163,114 @@ export function UploadPanel() {
           </div>
         )}
 
-      {/* =====================================================
-          Extraction summary
+            {/* =====================================================
+          Assessment overview
           ===================================================== */}
 
       {(questions.length > 0 ||
         answers.length > 0 ||
         mappings.length > 0) && (
-        <div className="grid gap-4 md:grid-cols-3">
-          <div className="rounded-2xl border bg-white p-5 shadow-sm">
-            <p className="text-xs uppercase tracking-wide text-muted-foreground">
-              Questions
-            </p>
+        <section className="space-y-6">
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-2">
+              <span className="h-2 w-2 rounded-full bg-green-500" />
 
-            <p className="mt-2 text-3xl font-semibold">
-              {questions.length}
-            </p>
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                Assessment overview
+              </p>
+            </div>
 
-            <p className="mt-1 text-xs text-muted-foreground">
-              Extracted from paper
-            </p>
+            <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+              <div>
+                <h2 className="text-2xl font-semibold tracking-tight">
+                  Assessment progress
+                </h2>
+
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Review extracted questions and detected student responses.
+                </p>
+              </div>
+
+              <span className="w-fit rounded-full border bg-white px-3 py-1.5 text-xs font-medium text-muted-foreground">
+                Processing complete
+              </span>
+            </div>
           </div>
 
-          <div className="rounded-2xl border bg-white p-5 shadow-sm">
-            <p className="text-xs uppercase tracking-wide text-muted-foreground">
-              Student Answers
-            </p>
+          <div className="grid gap-4 md:grid-cols-3">
+            {/* Questions */}
 
-            <p className="mt-2 text-3xl font-semibold">
-              {answers.length}
-            </p>
+            <div className="rounded-2xl border border-black/10 bg-white p-5 shadow-[0_6px_24px_rgba(0,0,0,0.035)]">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-xs font-medium uppercase tracking-[0.12em] text-muted-foreground">
+                    Questions
+                  </p>
 
-            <p className="mt-1 text-xs text-muted-foreground">
-              Handwritten responses detected
-            </p>
+                  <p className="mt-3 text-3xl font-semibold tracking-tight">
+                    {questions.length}
+                  </p>
+                </div>
+
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-black text-xs font-semibold text-white">
+                  Q
+                </div>
+              </div>
+
+              <p className="mt-3 text-xs text-muted-foreground">
+                Extracted from the question paper
+              </p>
+            </div>
+
+            {/* Answers */}
+
+            <div className="rounded-2xl border border-black/10 bg-white p-5 shadow-[0_6px_24px_rgba(0,0,0,0.035)]">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-xs font-medium uppercase tracking-[0.12em] text-muted-foreground">
+                    Student answers
+                  </p>
+
+                  <p className="mt-3 text-3xl font-semibold tracking-tight">
+                    {answers.length}
+                  </p>
+                </div>
+
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-orange-50 text-xs font-semibold text-orange-600">
+                  A
+                </div>
+              </div>
+
+              <p className="mt-3 text-xs text-muted-foreground">
+                Handwritten responses detected
+              </p>
+            </div>
+
+            {/* Mappings */}
+
+            <div className="rounded-2xl border border-black/10 bg-white p-5 shadow-[0_6px_24px_rgba(0,0,0,0.035)]">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-xs font-medium uppercase tracking-[0.12em] text-muted-foreground">
+                    Mapped
+                  </p>
+
+                  <p className="mt-3 text-3xl font-semibold tracking-tight">
+                    {mappings.length}
+                  </p>
+                </div>
+
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-green-50 text-xs font-semibold text-green-600">
+                  ✓
+                </div>
+              </div>
+
+              <p className="mt-3 text-xs text-muted-foreground">
+                Questions matched to student answers
+              </p>
+            </div>
           </div>
-
-          <div className="rounded-2xl border bg-white p-5 shadow-sm">
-            <p className="text-xs uppercase tracking-wide text-muted-foreground">
-              Mappings
-            </p>
-
-            <p className="mt-2 text-3xl font-semibold">
-              {mappings.length}
-            </p>
-
-            <p className="mt-1 text-xs text-muted-foreground">
-              Questions matched to answers
-            </p>
-          </div>
-        </div>
+        </section>
       )}
 
       {/* =====================================================
@@ -1220,25 +1278,32 @@ export function UploadPanel() {
           ===================================================== */}
 
       {questions.length > 0 && (
-        <div className="overflow-hidden rounded-2xl border bg-white shadow-sm">
-          <div className="border-b px-6 py-5">
-            <div className="flex items-center justify-between gap-4">
+        <section className="overflow-hidden rounded-3xl border border-black/10 bg-white shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+          <div className="border-b border-black/10 px-6 py-6">
+            <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-start">
               <div>
-                <p className="text-xs uppercase tracking-[0.12em] text-muted-foreground">
-                  AI extraction preview
-                </p>
+                <div className="flex items-center gap-2">
+                  <span className="rounded-full bg-orange-50 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-orange-600">
+                    AI extraction
+                  </span>
 
-                <h2 className="mt-1 text-xl font-semibold">
+                  <span className="text-xs text-muted-foreground">
+                    {questions.length} questions
+                  </span>
+                </div>
+
+                <h2 className="mt-3 text-xl font-semibold tracking-tight">
                   Extracted questions
                 </h2>
 
-                <p className="mt-1 text-sm text-muted-foreground">
-                  Questions extracted from the printed paper.
+                <p className="mt-1.5 max-w-2xl text-sm leading-6 text-muted-foreground">
+                  Questions identified from the printed assessment. Select a
+                  question to inspect its answer mapping.
                 </p>
               </div>
 
-              <div className="rounded-full border bg-muted/30 px-3 py-1.5 text-xs font-medium">
-                {questions.length} questions
+              <div className="rounded-xl border bg-[#fafafa] px-3 py-2 text-xs font-medium text-muted-foreground">
+                Click a question to inspect
               </div>
             </div>
           </div>
@@ -1257,48 +1322,48 @@ export function UploadPanel() {
                       question.id
                     )
                   }
-                  className={`cursor-pointer border-b px-6 py-5 transition last:border-b-0 ${
+                  className={`group cursor-pointer border-b border-black/5 px-6 py-5 transition last:border-b-0 ${
                     selectedQuestionId ===
                     question.id
-                      ? "bg-muted/20"
-                      : "hover:bg-muted/10"
+                      ? "bg-orange-50/50"
+                      : "hover:bg-[#fafafa]"
                   }`}
                 >
                   <div className="flex gap-4">
                     <div
-                      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-sm font-semibold ${
+                      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-sm font-semibold transition ${
                         selectedQuestionId ===
                         question.id
                           ? "bg-black text-white"
-                          : "bg-muted/50"
+                          : "bg-black/5 text-foreground group-hover:bg-black/10"
                       }`}
                     >
                       {question.number}
                     </div>
 
                     <div className="min-w-0 flex-1">
-                      <p className="text-[15px] leading-7">
-                        {question.text}
-                      </p>
-
-                      <div className="mt-3 flex flex-wrap gap-2">
-                        <span className="rounded-md border bg-muted/20 px-2.5 py-1 text-xs">
-                          Page{" "}
-                          {question.page}
-                        </span>
+                      <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-start">
+                        <p className="text-[15px] leading-7">
+                          {question.text}
+                        </p>
 
                         {question.marks !==
                           undefined && (
-                          <span className="rounded-md border bg-muted/20 px-2.5 py-1 text-xs">
+                          <span className="shrink-0 rounded-full border bg-white px-2.5 py-1 text-[11px] font-medium text-muted-foreground">
                             {question.marks}{" "}
-                            {question.marks ===
-                            1
+                            {question.marks === 1
                               ? "mark"
                               : "marks"}
                           </span>
                         )}
+                      </div>
 
-                        <span className="rounded-md border bg-muted/20 px-2.5 py-1 text-xs">
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        <span className="rounded-md border bg-[#fafafa] px-2.5 py-1 text-xs text-muted-foreground">
+                          Page {question.page}
+                        </span>
+
+                        <span className="rounded-md border bg-[#fafafa] px-2.5 py-1 text-xs text-muted-foreground">
                           Confidence{" "}
                           {Math.round(
                             question.confidence *
@@ -1307,9 +1372,8 @@ export function UploadPanel() {
                           %
                         </span>
 
-                        <span className="rounded-md border bg-muted/20 px-2.5 py-1 text-xs">
-                          Order{" "}
-                          {question.order}
+                        <span className="rounded-md border bg-[#fafafa] px-2.5 py-1 text-xs text-muted-foreground">
+                          Order {question.order}
                         </span>
                       </div>
                     </div>
@@ -1317,7 +1381,7 @@ export function UploadPanel() {
                 </div>
               ))}
           </div>
-        </div>
+        </section>
       )}
 
       {/* =====================================================
@@ -1325,424 +1389,671 @@ export function UploadPanel() {
           ===================================================== */}
 
       {questions.length > 0 && (
-        <div className="grid gap-6 lg:grid-cols-[1fr_1.15fr]">
+        <section className="space-y-5">
+          {/* Section header */}
 
-          {/* Question mapping */}
+          <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="h-2 w-2 rounded-full bg-orange-500" />
 
-          <div className="overflow-hidden rounded-2xl border bg-white shadow-sm">
-            <div className="border-b px-5 py-5">
-              <p className="text-xs uppercase tracking-[0.12em] text-muted-foreground">
+                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                  Assessment review
+                </p>
+              </div>
+
+              <h2 className="mt-2 text-2xl font-semibold tracking-tight">
                 Question mapping
-              </p>
-
-              <h2 className="mt-1 text-xl font-semibold">
-                Question → Answer
               </h2>
 
               <p className="mt-1 text-sm text-muted-foreground">
-                Select a question to inspect the student's
-                detected answer.
+                Select a question to inspect the student's detected answer
+                and its exact location on the answer sheet.
               </p>
             </div>
 
-            <div className="divide-y">
-              {[...questions]
-                .sort(
-                  (a, b) =>
-                    a.order - b.order
-                )
-                .map((question) => {
-                  const mapping =
-                    mappings.find(
-                      (item) =>
-                        item.questionId ===
-                        question.id
-                    );
+            <div className="w-fit rounded-full border bg-white px-3 py-1.5 text-xs font-medium text-muted-foreground">
+              {questions.length} questions
+            </div>
+          </div>
 
-                  const answer =
-                    mapping?.answerId
-                      ? answers.find(
-                          (item) =>
-                            item.id ===
-                            mapping.answerId
-                        )
-                      : null;
+          {/* Main review workspace */}
 
-                  const evaluation =
-                    evaluations.find(
-                      (item) =>
-                        item.questionId ===
-                        question.id
-                    );
+          <div className="grid overflow-hidden rounded-3xl border border-black/10 bg-white shadow-[0_8px_30px_rgba(0,0,0,0.04)] lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+            {/* Question mapping */}
 
-                  const isSelected =
-                    selectedQuestionId ===
-                    question.id;
+            <div className="min-w-0 border-b border-black/10 lg:border-b-0 lg:border-r">
+              <div className="border-b border-black/10 bg-[#fafafa] px-5 py-4">
+                <div className="flex items-center justify-between gap-3">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                      Questions
+                    </p>
 
-                  return (
-                    <button
-                      key={question.id}
-                      type="button"
-                      onClick={() =>
-                        setSelectedQuestionId(
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      Click to inspect
+                    </p>
+                  </div>
+
+                  <div className="rounded-lg border bg-white px-2.5 py-1 text-xs font-medium">
+                    {mappings.length} mapped
+                  </div>
+                </div>
+              </div>
+
+              <div className="max-h-[680px] overflow-y-auto">
+                {[...questions]
+                  .sort(
+                    (a, b) =>
+                      a.order - b.order
+                  )
+                  .map((question) => {
+                    const mapping =
+                      mappings.find(
+                        (item) =>
+                          item.questionId ===
                           question.id
-                        )
-                      }
-                      className={`w-full p-5 text-left transition ${
-                        isSelected
-                          ? "bg-muted/20"
-                          : "hover:bg-muted/10"
-                      }`}
-                    >
-                      <div className="flex gap-4">
-                        <div
-                          className={`flex size-10 shrink-0 items-center justify-center rounded-xl text-sm font-semibold ${
-                            isSelected
-                              ? "bg-black text-white"
-                              : "bg-muted"
-                          }`}
-                        >
-                          {question.number}
-                        </div>
+                      );
 
-                        <div className="min-w-0 flex-1">
-                          <p className="text-sm leading-6">
-                            {question.text}
-                          </p>
+                    const answer =
+                      mapping?.answerId
+                        ? answers.find(
+                            (item) =>
+                              item.id ===
+                              mapping.answerId
+                          )
+                        : null;
 
-                          <div className="mt-3 flex flex-wrap gap-2">
-                            <span
-                              className={`rounded-full border px-2.5 py-1 text-xs ${
-                                mapping?.status ===
-                                "answered"
-                                  ? "bg-green-50 text-green-700"
-                                  : mapping?.status ===
-                                    "ambiguous"
-                                  ? "bg-yellow-50 text-yellow-700"
-                                  : "bg-red-50 text-red-700"
-                              }`}
-                            >
-                              {mapping?.status ??
-                                "unmapped"}
-                            </span>
+                    const evaluation =
+                      evaluations.find(
+                        (item) =>
+                          item.questionId ===
+                          question.id
+                      );
 
-                            <span className="rounded-full border bg-muted/20 px-2.5 py-1 text-xs">
-                              {mapping?.method ??
-                                "manual"}
-                            </span>
+                    const isSelected =
+                      selectedQuestionId ===
+                      question.id;
 
-                            <span className="rounded-full border bg-muted/20 px-2.5 py-1 text-xs">
-                              {mapping
-                                ? Math.round(
-                                    mapping.confidence *
-                                      100
-                                  )
-                                : 0}
-                              %
-                            </span>
+                    return (
+                      <button
+                        key={question.id}
+                        type="button"
+                        onClick={() =>
+                          setSelectedQuestionId(
+                            question.id
+                          )
+                        }
+                        className={`group w-full border-b border-black/5 px-5 py-5 text-left transition last:border-b-0 ${
+                          isSelected
+                            ? "bg-orange-50/60"
+                            : "hover:bg-[#fafafa]"
+                        }`}
+                      >
+                        <div className="flex gap-3.5">
+                          {/* Question number */}
 
-                            {evaluation && (
-                              <span
-                                className={`rounded-full border px-2.5 py-1 text-xs font-medium ${getEvaluationStyle(
-                                  evaluation.status
-                                )}`}
-                              >
-                                {evaluation.status}
-                              </span>
-                            )}
+                          <div
+                            className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-sm font-semibold transition ${
+                              isSelected
+                                ? "bg-black text-white shadow-sm"
+                                : "bg-black/5 text-foreground group-hover:bg-black/10"
+                            }`}
+                          >
+                            {question.number}
                           </div>
 
-                          <p className="mt-2 text-xs text-muted-foreground">
-                            {answer
-                              ? answer.detectedLabel ??
-                                "Answer detected"
-                              : "No matching answer"}
-                          </p>
+                          {/* Question information */}
+
+                          <div className="min-w-0 flex-1">
+                            <div className="flex items-start justify-between gap-3">
+                              <p className="text-sm font-medium leading-6">
+                                {question.text}
+                              </p>
+
+                              {evaluation && (
+                                <span
+                                  className={`shrink-0 rounded-full border px-2 py-1 text-[10px] font-semibold ${getEvaluationStyle(
+                                    evaluation.status
+                                  )}`}
+                                >
+                                  {evaluation.status}
+                                </span>
+                              )}
+                            </div>
+
+                            <div className="mt-3 flex flex-wrap gap-1.5">
+                              <span
+                                className={`rounded-full border px-2.5 py-1 text-[11px] font-medium ${
+                                  mapping?.status ===
+                                  "answered"
+                                    ? "border-green-200 bg-green-50 text-green-700"
+                                    : mapping?.status ===
+                                      "ambiguous"
+                                    ? "border-yellow-200 bg-yellow-50 text-yellow-700"
+                                    : "border-red-200 bg-red-50 text-red-700"
+                                }`}
+                              >
+                                {mapping?.status ??
+                                  "unmapped"}
+                              </span>
+
+                              <span className="rounded-full border bg-white px-2.5 py-1 text-[11px] text-muted-foreground">
+                                {mapping?.method ??
+                                  "manual"}
+                              </span>
+
+                              <span className="rounded-full border bg-white px-2.5 py-1 text-[11px] text-muted-foreground">
+                                {mapping
+                                  ? Math.round(
+                                      mapping.confidence *
+                                        100
+                                    )
+                                  : 0}
+                                % match
+                              </span>
+                            </div>
+
+                            <div className="mt-2 flex items-center justify-between gap-3">
+                              <p className="truncate text-xs text-muted-foreground">
+                                {answer
+                                  ? answer.detectedLabel ??
+                                    "Answer detected"
+                                  : "No matching answer"}
+                              </p>
+
+                              {question.marks !==
+                                undefined && (
+                                <span className="shrink-0 text-xs font-medium text-muted-foreground">
+                                  {question.marks}{" "}
+                                  {question.marks === 1
+                                    ? "mark"
+                                    : "marks"}
+                                </span>
+                              )}
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </button>
-                  );
-                })}
+                      </button>
+                    );
+                  })}
+              </div>
+            </div>
+
+            {/* Answer sheet */}
+
+            <div className="min-w-0 bg-[#fafafa]">
+              <div className="border-b border-black/10 bg-white px-5 py-4">
+                <div className="flex items-center justify-between gap-3">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                      Student answer sheet
+                    </p>
+
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      Highlighted region shows the detected response
+                    </p>
+                  </div>
+
+                  {selectedQuestionId && (
+                    <span className="rounded-lg border bg-[#fafafa] px-2.5 py-1 text-xs font-medium">
+                      Q
+                      {
+                        questions.find(
+                          (question) =>
+                            question.id ===
+                            selectedQuestionId
+                        )?.number
+                      }
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              <div className="p-4 sm:p-5">
+                <AnswerSheetViewer
+                  file={
+                    answerSheetFiles[0]?.file ??
+                    null
+                  }
+                  answer={selectedAnswer}
+                  initialPage={
+                    selectedAnswer?.regions[0]
+                      ?.page ?? 1
+                  }
+                />
+              </div>
             </div>
           </div>
 
-          {/* Answer sheet viewer */}
+          {/* Mapping summary */}
 
-          <div className="min-w-0">
-            <AnswerSheetViewer
-              file={
-                answerSheetFiles[0]?.file ??
-                null
-              }
-              answer={selectedAnswer}
-              initialPage={
-                selectedAnswer?.regions[0]
-                  ?.page ?? 1
-              }
-            />
-          </div>
-        </div>
+          {mappingMetadata && (
+            <div className="rounded-2xl border border-black/10 bg-white p-5 shadow-[0_6px_24px_rgba(0,0,0,0.035)]">
+              <div className="mb-4 flex items-center justify-between gap-3">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                    Mapping summary
+                  </p>
+
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    Coverage across extracted questions.
+                  </p>
+                </div>
+
+                <span className="rounded-full border bg-[#fafafa] px-3 py-1.5 text-xs font-medium text-green-600">
+                  Mapping complete
+                </span>
+              </div>
+
+              <div className="grid gap-3 sm:grid-cols-3">
+                <div className="rounded-xl border bg-[#fafafa] p-4">
+                  <p className="text-xs text-muted-foreground">
+                    Answered
+                  </p>
+
+                  <p className="mt-2 text-2xl font-semibold">
+                    {mappingMetadata.answeredCount}
+                  </p>
+                </div>
+
+                <div className="rounded-xl border bg-[#fafafa] p-4">
+                  <p className="text-xs text-muted-foreground">
+                    Unanswered
+                  </p>
+
+                  <p className="mt-2 text-2xl font-semibold">
+                    {mappingMetadata.unansweredCount}
+                  </p>
+                </div>
+
+                <div className="rounded-xl border bg-[#fafafa] p-4">
+                  <p className="text-xs text-muted-foreground">
+                    Ambiguous
+                  </p>
+
+                  <p className="mt-2 text-2xl font-semibold">
+                    {mappingMetadata.ambiguousCount}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+        </section>
       )}
 
-      {/* =====================================================
-          Mapping summary
-          ===================================================== */}
-
-      {mappingMetadata && (
-        <div className="rounded-2xl border bg-white p-6 shadow-sm">
-          <div className="mb-5">
-            <p className="text-xs uppercase tracking-[0.12em] text-muted-foreground">
-              Answer mapping
-            </p>
-
-            <h2 className="mt-1 text-xl font-semibold">
-              Mapping complete
-            </h2>
-
-            <p className="mt-1 text-sm text-muted-foreground">
-              Each extracted question has been matched
-              against the student's detected answers.
-            </p>
-          </div>
-
-          <div className="grid gap-3 sm:grid-cols-3">
-            <div className="rounded-xl border bg-muted/10 p-4">
-              <p className="text-xs text-muted-foreground">
-                Answered
-              </p>
-
-              <p className="mt-2 text-2xl font-semibold">
-                {mappingMetadata.answeredCount}
-              </p>
-            </div>
-
-            <div className="rounded-xl border bg-muted/10 p-4">
-              <p className="text-xs text-muted-foreground">
-                Unanswered
-              </p>
-
-              <p className="mt-2 text-2xl font-semibold">
-                {mappingMetadata.unansweredCount}
-              </p>
-            </div>
-
-            <div className="rounded-xl border bg-muted/10 p-4">
-              <p className="text-xs text-muted-foreground">
-                Ambiguous
-              </p>
-
-              <p className="mt-2 text-2xl font-semibold">
-                {mappingMetadata.ambiguousCount}
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* =====================================================
+            {/* =====================================================
           AI Evaluation Summary
           ===================================================== */}
 
       {evaluationMetadata && (
-        <div className="rounded-2xl border bg-white p-6 shadow-sm">
-          <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <div>
-              <p className="text-xs uppercase tracking-[0.12em] text-muted-foreground">
-                AI evaluation
-              </p>
+        <section className="overflow-hidden rounded-3xl border border-black/10 bg-white shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+          {/* Header */}
 
-              <h2 className="mt-1 text-xl font-semibold">
-                Grading complete
-              </h2>
+          <div className="border-b border-black/10 px-6 py-6">
+            <div className="flex flex-col justify-between gap-5 md:flex-row md:items-center">
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="h-2 w-2 rounded-full bg-green-500" />
 
-              <p className="mt-1 text-sm text-muted-foreground">
-                AI evaluated the student's answers against
-                the extracted questions.
-              </p>
-            </div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                    AI evaluation
+                  </p>
 
-            <div className="rounded-2xl border bg-muted/20 px-6 py-4 text-center">
-              <p className="text-xs text-muted-foreground">
-                Final score
-              </p>
+                  <span className="rounded-full border bg-green-50 px-2.5 py-1 text-[10px] font-semibold text-green-700">
+                    Complete
+                  </span>
+                </div>
 
-              <p className="mt-1 text-3xl font-bold">
-                {evaluationMetadata.obtainedMarks}
-                <span className="text-lg font-medium text-muted-foreground">
-                  {" "}
-                  /{" "}
-                  {evaluationMetadata.totalMarks}
-                </span>
-              </p>
+                <h2 className="mt-2 text-2xl font-semibold tracking-tight">
+                  Grading results
+                </h2>
 
-              <p className="mt-1 text-sm font-medium">
-                {evaluationMetadata.percentage}%
-              </p>
+                <p className="mt-1.5 text-sm leading-6 text-muted-foreground">
+                  AI evaluated the student's answers against the extracted
+                  questions.
+                </p>
+              </div>
+
+              {/* Main score */}
+
+              <div className="flex items-center gap-5 rounded-2xl border bg-[#fafafa] px-5 py-4">
+                <div>
+                  <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                    Overall score
+                  </p>
+
+                  <p className="mt-1 text-3xl font-bold tracking-tight">
+                    {evaluationMetadata.percentage}%
+                  </p>
+                </div>
+
+                <div className="h-10 w-px bg-black/10" />
+
+                <div>
+                  <p className="text-xs text-muted-foreground">
+                    Marks
+                  </p>
+
+                  <p className="mt-1 text-lg font-semibold">
+                    {evaluationMetadata.obtainedMarks}
+                    <span className="text-sm font-medium text-muted-foreground">
+                      {" "}
+                      / {evaluationMetadata.totalMarks}
+                    </span>
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            <div className="rounded-xl border bg-green-50/50 p-4">
-              <p className="text-xs text-muted-foreground">
-                Correct
-              </p>
+          {/* Score distribution */}
 
-              <p className="mt-2 text-2xl font-semibold text-green-700">
+          <div className="grid gap-3 p-5 sm:grid-cols-2 lg:grid-cols-4">
+            {/* Correct */}
+
+            <div className="rounded-2xl border border-green-200 bg-green-50/50 p-5">
+              <div className="flex items-center justify-between">
+                <p className="text-xs font-medium uppercase tracking-wide text-green-700">
+                  Correct
+                </p>
+
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-green-100 text-sm font-semibold text-green-700">
+                  ✓
+                </span>
+              </div>
+
+              <p className="mt-3 text-3xl font-semibold tracking-tight text-green-700">
                 {evaluationMetadata.correctCount}
               </p>
+
+              <p className="mt-1 text-xs text-muted-foreground">
+                Fully correct answers
+              </p>
             </div>
 
-            <div className="rounded-xl border bg-yellow-50/50 p-4">
-              <p className="text-xs text-muted-foreground">
-                Partial
-              </p>
+            {/* Partial */}
 
-              <p className="mt-2 text-2xl font-semibold text-yellow-700">
+            <div className="rounded-2xl border border-yellow-200 bg-yellow-50/50 p-5">
+              <div className="flex items-center justify-between">
+                <p className="text-xs font-medium uppercase tracking-wide text-yellow-700">
+                  Partial
+                </p>
+
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-yellow-100 text-sm font-semibold text-yellow-700">
+                  ◐
+                </span>
+              </div>
+
+              <p className="mt-3 text-3xl font-semibold tracking-tight text-yellow-700">
                 {evaluationMetadata.partialCount}
               </p>
+
+              <p className="mt-1 text-xs text-muted-foreground">
+                Partially correct answers
+              </p>
             </div>
 
-            <div className="rounded-xl border bg-red-50/50 p-4">
-              <p className="text-xs text-muted-foreground">
-                Incorrect
-              </p>
+            {/* Incorrect */}
 
-              <p className="mt-2 text-2xl font-semibold text-red-700">
+            <div className="rounded-2xl border border-red-200 bg-red-50/50 p-5">
+              <div className="flex items-center justify-between">
+                <p className="text-xs font-medium uppercase tracking-wide text-red-700">
+                  Incorrect
+                </p>
+
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-red-100 text-sm font-semibold text-red-700">
+                  ×
+                </span>
+              </div>
+
+              <p className="mt-3 text-3xl font-semibold tracking-tight text-red-700">
                 {evaluationMetadata.incorrectCount}
               </p>
+
+              <p className="mt-1 text-xs text-muted-foreground">
+                Incorrect answers
+              </p>
             </div>
 
-            <div className="rounded-xl border bg-muted/20 p-4">
-              <p className="text-xs text-muted-foreground">
-                Unanswered
+            {/* Unanswered */}
+
+            <div className="rounded-2xl border border-black/10 bg-[#fafafa] p-5">
+              <div className="flex items-center justify-between">
+                <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                  Unanswered
+                </p>
+
+                <span className="flex h-7 w-7 items-center justify-center rounded-full border bg-white text-xs font-semibold text-muted-foreground">
+                  —
+                </span>
+              </div>
+
+              <p className="mt-3 text-3xl font-semibold tracking-tight">
+                {evaluationMetadata.unansweredCount}
               </p>
 
-              <p className="mt-2 text-2xl font-semibold">
-                {evaluationMetadata.unansweredCount}
+              <p className="mt-1 text-xs text-muted-foreground">
+                Questions left unanswered
               </p>
             </div>
           </div>
-        </div>
+
+          {/* Score progress */}
+
+          <div className="px-5 pb-6">
+            <div className="rounded-2xl border bg-[#fafafa] p-4">
+              <div className="flex items-center justify-between gap-3 text-xs">
+                <span className="font-medium">
+                  Overall performance
+                </span>
+
+                <span className="text-muted-foreground">
+                  {evaluationMetadata.obtainedMarks} /{" "}
+                  {evaluationMetadata.totalMarks} marks
+                </span>
+              </div>
+
+              <div className="mt-3 h-2 overflow-hidden rounded-full bg-black/5">
+                <div
+                  className="h-full rounded-full bg-black transition-all"
+                  style={{
+                    width: `${Math.min(
+                      Math.max(
+                        evaluationMetadata.percentage,
+                        0
+                      ),
+                      100
+                    )}%`,
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+        </section>
       )}
 
-      {/* =====================================================
+            {/* =====================================================
           Teacher feedback
           ===================================================== */}
 
       {teacherFeedback && (
-        <div className="rounded-2xl border bg-white p-6 shadow-sm">
-          <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-            <div>
-              <p className="text-xs uppercase tracking-[0.12em] text-muted-foreground">
-                Teacher feedback
-              </p>
+        <section className="overflow-hidden rounded-3xl border border-black/10 bg-white shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+          {/* Header */}
 
-              <h2 className="mt-1 text-xl font-semibold">
-                Overall assessment
-              </h2>
+          <div className="border-b border-black/10 px-6 py-6">
+            <div className="flex flex-col justify-between gap-4 md:flex-row md:items-start">
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="h-2 w-2 rounded-full bg-orange-500" />
 
-              <p className="mt-1 text-sm text-muted-foreground">
-                AI-generated feedback based on the completed grading results.
-              </p>
-            </div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                    Teacher feedback
+                  </p>
+                </div>
 
-            {teacherFeedbackModel && (
-              <span className="rounded-full border bg-muted/20 px-3 py-1.5 text-xs">
-                {teacherFeedbackModel}
-              </span>
-            )}
-          </div>
+                <h2 className="mt-2 text-2xl font-semibold tracking-tight">
+                  Overall assessment
+                </h2>
 
-          <div className="rounded-xl border bg-muted/10 p-5">
-            <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-              Summary
-            </p>
+                <p className="mt-1.5 max-w-2xl text-sm leading-6 text-muted-foreground">
+                  AI-generated feedback based on the completed grading
+                  results.
+                </p>
+              </div>
 
-            <p className="mt-2 text-sm leading-7">
-              {teacherFeedback.summary}
-            </p>
-          </div>
+              {teacherFeedbackModel && (
+                <div className="flex items-center gap-2 rounded-full border bg-[#fafafa] px-3 py-1.5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-green-500" />
 
-          <div className="mt-4 grid gap-4 md:grid-cols-2">
-            <div className="rounded-xl border bg-green-50/40 p-5">
-              <p className="text-xs font-medium uppercase tracking-wide text-green-700">
-                Strengths
-              </p>
-
-              <ul className="mt-3 space-y-2 text-sm leading-6">
-                {teacherFeedback.strengths.map(
-                  (strength, index) => (
-                    <li
-                      key={`strength-${index}`}
-                      className="flex gap-2"
-                    >
-                      <span className="mt-1 shrink-0 text-green-700">
-                        ✓
-                      </span>
-                      <span>{strength}</span>
-                    </li>
-                  )
-                )}
-              </ul>
-            </div>
-
-            <div className="rounded-xl border bg-yellow-50/40 p-5">
-              <p className="text-xs font-medium uppercase tracking-wide text-yellow-700">
-                Areas to improve
-              </p>
-
-              <ul className="mt-3 space-y-2 text-sm leading-6">
-                {teacherFeedback.areasToImprove.map(
-                  (area, index) => (
-                    <li
-                      key={`improvement-${index}`}
-                      className="flex gap-2"
-                    >
-                      <span className="mt-1 shrink-0 text-yellow-700">
-                        •
-                      </span>
-                      <span>{area}</span>
-                    </li>
-                  )
-                )}
-              </ul>
+                  <span className="text-xs font-medium text-muted-foreground">
+                    {teacherFeedbackModel}
+                  </span>
+                </div>
+              )}
             </div>
           </div>
 
-          <div className="mt-4 rounded-xl border bg-muted/10 p-5">
-            <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-              Recommendation
-            </p>
+          {/* Summary */}
 
-            <p className="mt-2 text-sm leading-7">
-              {teacherFeedback.recommendation}
-            </p>
+          <div className="p-5 sm:p-6">
+            <div className="rounded-2xl border bg-[#fafafa] p-5">
+              <div className="flex items-center gap-2">
+                <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-black text-xs font-semibold text-white">
+                  AI
+                </span>
+
+                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                  Summary
+                </p>
+              </div>
+
+              <p className="mt-4 text-sm leading-7">
+                {teacherFeedback.summary}
+              </p>
+            </div>
+
+            {/* Strengths + Improvements */}
+
+            <div className="mt-4 grid gap-4 md:grid-cols-2">
+              {/* Strengths */}
+
+              <div className="rounded-2xl border border-green-200 bg-green-50/40 p-5">
+                <div className="flex items-center gap-2">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-green-100 text-sm font-semibold text-green-700">
+                    ✓
+                  </span>
+
+                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-green-700">
+                    Strengths
+                  </p>
+                </div>
+
+                <ul className="mt-4 space-y-3 text-sm leading-6">
+                  {teacherFeedback.strengths.map(
+                    (strength, index) => (
+                      <li
+                        key={`strength-${index}`}
+                        className="flex gap-3"
+                      >
+                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-green-600" />
+
+                        <span>{strength}</span>
+                      </li>
+                    )
+                  )}
+                </ul>
+              </div>
+
+              {/* Areas to improve */}
+
+              <div className="rounded-2xl border border-yellow-200 bg-yellow-50/40 p-5">
+                <div className="flex items-center gap-2">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-yellow-100 text-sm font-semibold text-yellow-700">
+                    !
+                  </span>
+
+                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-yellow-700">
+                    Areas to improve
+                  </p>
+                </div>
+
+                <ul className="mt-4 space-y-3 text-sm leading-6">
+                  {teacherFeedback.areasToImprove.map(
+                    (area, index) => (
+                      <li
+                        key={`improvement-${index}`}
+                        className="flex gap-3"
+                      >
+                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-yellow-600" />
+
+                        <span>{area}</span>
+                      </li>
+                    )
+                  )}
+                </ul>
+              </div>
+            </div>
+
+            {/* Recommendation */}
+
+            <div className="mt-4 rounded-2xl border border-black/10 bg-white p-5">
+              <div className="flex items-center gap-2">
+                <span className="flex h-7 w-7 items-center justify-center rounded-lg border bg-[#fafafa] text-xs font-semibold">
+                  →
+                </span>
+
+                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                  Recommendation
+                </p>
+              </div>
+
+              <p className="mt-4 text-sm leading-7">
+                {teacherFeedback.recommendation}
+              </p>
+            </div>
           </div>
-        </div>
+        </section>
       )}
 
-      {/* =====================================================
+            {/* =====================================================
           Evaluation details
           ===================================================== */}
 
       {evaluations.length > 0 && (
-        <div className="rounded-2xl border bg-white p-6 shadow-sm">
-          <div className="mb-5">
-            <p className="text-xs uppercase tracking-[0.12em] text-muted-foreground">
-              AI grading details
-            </p>
+        <section className="overflow-hidden rounded-3xl border border-black/10 bg-white shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+          {/* Header */}
 
-            <h2 className="mt-1 text-xl font-semibold">
-              Question-by-question evaluation
-            </h2>
+          <div className="border-b border-black/10 px-6 py-6">
+            <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="h-2 w-2 rounded-full bg-black" />
 
-            <p className="mt-1 text-sm text-muted-foreground">
-              Review the score, result, and AI feedback for
-              each question.
-            </p>
+                  <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                    AI grading details
+                  </p>
+                </div>
+
+                <h2 className="mt-2 text-2xl font-semibold tracking-tight">
+                  Question-by-question evaluation
+                </h2>
+
+                <p className="mt-1.5 max-w-2xl text-sm leading-6 text-muted-foreground">
+                  Review the score, result, confidence, and AI feedback for
+                  every evaluated question.
+                </p>
+              </div>
+
+              <span className="w-fit rounded-full border bg-[#fafafa] px-3 py-1.5 text-xs font-medium text-muted-foreground">
+                {evaluations.length} evaluated
+              </span>
+            </div>
           </div>
 
-          <div className="space-y-3">
+          {/* Evaluations */}
+
+          <div className="divide-y divide-black/5">
             {[...questions]
               .sort(
                 (a, b) =>
@@ -1760,6 +2071,10 @@ export function UploadPanel() {
                   return null;
                 }
 
+                const isSelected =
+                  selectedQuestionId ===
+                  question.id;
+
                 return (
                   <button
                     key={question.id}
@@ -1769,155 +2084,270 @@ export function UploadPanel() {
                         question.id
                       )
                     }
-                    className={`w-full rounded-xl border p-5 text-left transition ${
-                      selectedQuestionId ===
-                      question.id
-                        ? "border-black bg-muted/10"
-                        : "hover:bg-muted/10"
+                    className={`group w-full px-6 py-5 text-left transition ${
+                      isSelected
+                        ? "bg-orange-50/50"
+                        : "hover:bg-[#fafafa]"
                     }`}
                   >
-                    <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+                    <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
+                      {/* Question + feedback */}
+
                       <div className="min-w-0 flex-1">
-                        <div className="flex items-center gap-3">
-                          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-muted/50 text-xs font-semibold">
+                        <div className="flex items-start gap-3">
+                          <span
+                            className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-xs font-semibold transition ${
+                              isSelected
+                                ? "bg-black text-white"
+                                : "bg-black/5 text-foreground group-hover:bg-black/10"
+                            }`}
+                          >
                             {question.number}
                           </span>
 
-                          <p className="font-medium">
-                            {question.text}
+                          <div className="min-w-0 flex-1">
+                            <p className="font-medium leading-6">
+                              {question.text}
+                            </p>
+
+                            <div className="mt-3 flex flex-wrap gap-2">
+                              <span
+                                className={`rounded-full border px-2.5 py-1 text-[11px] font-semibold ${getEvaluationStyle(
+                                  evaluation.status
+                                )}`}
+                              >
+                                {evaluation.status}
+                              </span>
+
+                              <span className="rounded-full border bg-[#fafafa] px-2.5 py-1 text-[11px] text-muted-foreground">
+                                Confidence{" "}
+                                {Math.round(
+                                  evaluation.confidence *
+                                    100
+                                )}
+                                %
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* AI feedback */}
+
+                        <div className="ml-12 mt-4 rounded-xl border bg-[#fafafa] p-4">
+                          <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                            AI feedback
+                          </p>
+
+                          <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                            {evaluation.feedback}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Score */}
+
+                      <div className="flex shrink-0 items-center gap-3 lg:ml-6 lg:flex-col lg:items-end">
+                        <div className="rounded-2xl border bg-white px-5 py-3 text-center shadow-sm">
+                          <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                            Score
+                          </p>
+
+                          <p className="mt-1 text-2xl font-semibold tracking-tight">
+                            {evaluation.score}
+                            <span className="text-sm font-medium text-muted-foreground">
+                              {" "}
+                              /{" "}
+                              {evaluation.maxScore}
+                            </span>
                           </p>
                         </div>
 
-                        <div className="mt-3 flex flex-wrap gap-2">
-                          <span
-                            className={`rounded-full border px-2.5 py-1 text-xs font-medium ${getEvaluationStyle(
-                              evaluation.status
-                            )}`}
-                          >
-                            {evaluation.status}
-                          </span>
-
-                          <span className="rounded-full border bg-muted/20 px-2.5 py-1 text-xs">
-                            Confidence{" "}
-                            {Math.round(
-                              evaluation.confidence *
-                                100
-                            )}
-                            %
-                          </span>
-                        </div>
-
-                        <p className="mt-3 text-sm leading-6 text-muted-foreground">
-                          {evaluation.feedback}
-                        </p>
-                      </div>
-
-                      <div className="shrink-0 rounded-xl border bg-muted/20 px-4 py-3 text-center">
-                        <p className="text-xs text-muted-foreground">
-                          Score
-                        </p>
-
-                        <p className="mt-1 text-xl font-semibold">
-                          {evaluation.score}
-                          <span className="text-sm text-muted-foreground">
-                            {" "}
-                            /{" "}
-                            {evaluation.maxScore}
-                          </span>
-                        </p>
+                        {question.marks !==
+                          undefined && (
+                          <p className="text-xs text-muted-foreground">
+                            {question.marks}{" "}
+                            {question.marks === 1
+                              ? "mark"
+                              : "marks"}{" "}
+                            possible
+                          </p>
+                        )}
                       </div>
                     </div>
                   </button>
                 );
               })}
           </div>
-        </div>
+        </section>
       )}
 
-      {/* =====================================================
+           {/* =====================================================
           Selected answer evaluation
           ===================================================== */}
 
       {selectedQuestion &&
         selectedEvaluation && (
-          <div className="rounded-2xl border bg-white p-6 shadow-sm">
-            <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
-              <div>
-                <p className="text-xs uppercase tracking-[0.12em] text-muted-foreground">
-                  Selected evaluation
-                </p>
+          <section className="overflow-hidden rounded-3xl border border-black/10 bg-white shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+            {/* Header */}
 
-                <h2 className="mt-1 text-xl font-semibold">
-                  Question{" "}
-                  {selectedQuestion.number}
-                </h2>
-              </div>
+            <div className="border-b border-black/10 px-6 py-6">
+              <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-start sm:justify-between">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="h-2 w-2 rounded-full bg-orange-500" />
 
-              <div
-                className={`rounded-full border px-3 py-1.5 text-xs font-medium ${getEvaluationStyle(
-                  selectedEvaluation.status
-                )}`}
-              >
-                {selectedEvaluation.status}
+                    <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                      Selected evaluation
+                    </p>
+                  </div>
+
+                  <h2 className="mt-2 text-2xl font-semibold tracking-tight">
+                    Question {selectedQuestion.number}
+                  </h2>
+
+                  <p className="mt-1.5 max-w-2xl text-sm leading-6 text-muted-foreground">
+                    Detailed grading information for the currently selected
+                    question.
+                  </p>
+                </div>
+
+                <div
+                  className={`w-fit rounded-full border px-3 py-1.5 text-xs font-semibold ${getEvaluationStyle(
+                    selectedEvaluation.status
+                  )}`}
+                >
+                  {selectedEvaluation.status}
+                </div>
               </div>
             </div>
 
-            <div className="mt-6 grid gap-4 md:grid-cols-3">
-              <div className="rounded-xl border bg-muted/10 p-4">
-                <p className="text-xs text-muted-foreground">
-                  Score
+            {/* Question */}
+
+            <div className="p-5 sm:p-6">
+              <div className="rounded-2xl border bg-[#fafafa] p-5">
+                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                  Question
                 </p>
 
-                <p className="mt-2 text-2xl font-semibold">
-                  {selectedEvaluation.score}{" "}
-                  <span className="text-sm text-muted-foreground">
-                    /{" "}
-                    {selectedEvaluation.maxScore}
-                  </span>
+                <p className="mt-3 text-sm leading-7">
+                  {selectedQuestion.text}
                 </p>
               </div>
 
-              <div className="rounded-xl border bg-muted/10 p-4">
-                <p className="text-xs text-muted-foreground">
-                  Evaluation confidence
-                </p>
+              {/* Metrics */}
 
-                <p className="mt-2 text-2xl font-semibold">
-                  {Math.round(
-                    selectedEvaluation.confidence *
-                      100
-                  )}
-                  %
-                </p>
-              </div>
+              <div className="mt-4 grid gap-3 md:grid-cols-3">
+                {/* Score */}
 
-              <div className="rounded-xl border bg-muted/10 p-4">
-                <p className="text-xs text-muted-foreground">
-                  Mapping confidence
-                </p>
+                <div className="rounded-2xl border bg-white p-5">
+                  <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                    Score
+                  </p>
 
-                <p className="mt-2 text-2xl font-semibold">
-                  {selectedMapping
-                    ? Math.round(
-                        selectedMapping.confidence *
+                  <p className="mt-2 text-3xl font-semibold tracking-tight">
+                    {selectedEvaluation.score}
+                    <span className="text-base font-medium text-muted-foreground">
+                      {" "}
+                      /{" "}
+                      {selectedEvaluation.maxScore}
+                    </span>
+                  </p>
+
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    Marks awarded
+                  </p>
+                </div>
+
+                {/* Evaluation confidence */}
+
+                <div className="rounded-2xl border bg-white p-5">
+                  <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                    Evaluation confidence
+                  </p>
+
+                  <p className="mt-2 text-3xl font-semibold tracking-tight">
+                    {Math.round(
+                      selectedEvaluation.confidence *
+                        100
+                    )}
+                    %
+                  </p>
+
+                  <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-black/5">
+                    <div
+                      className="h-full rounded-full bg-black transition-all"
+                      style={{
+                        width: `${Math.min(
+                          Math.max(
+                            selectedEvaluation.confidence *
+                              100,
+                            0
+                          ),
                           100
-                      )
-                    : 0}
-                  %
+                        )}%`,
+                      }}
+                    />
+                  </div>
+                </div>
+
+                {/* Mapping confidence */}
+
+                <div className="rounded-2xl border bg-white p-5">
+                  <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                    Mapping confidence
+                  </p>
+
+                  <p className="mt-2 text-3xl font-semibold tracking-tight">
+                    {selectedMapping
+                      ? Math.round(
+                          selectedMapping.confidence *
+                            100
+                        )
+                      : 0}
+                    %
+                  </p>
+
+                  <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-black/5">
+                    <div
+                      className="h-full rounded-full bg-black transition-all"
+                      style={{
+                        width: `${
+                          selectedMapping
+                            ? Math.min(
+                                Math.max(
+                                  selectedMapping.confidence *
+                                    100,
+                                  0
+                                ),
+                                100
+                              )
+                            : 0
+                        }%`,
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* AI feedback */}
+
+              <div className="mt-4 rounded-2xl border border-black/10 bg-[#fafafa] p-5">
+                <div className="flex items-center gap-2">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-black text-[10px] font-semibold text-white">
+                    AI
+                  </span>
+
+                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                    AI feedback
+                  </p>
+                </div>
+
+                <p className="mt-4 text-sm leading-7">
+                  {selectedEvaluation.feedback}
                 </p>
               </div>
             </div>
-
-            <div className="mt-5 rounded-xl border bg-muted/10 p-5">
-              <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                AI feedback
-              </p>
-
-              <p className="mt-2 text-sm leading-7">
-                {selectedEvaluation.feedback}
-              </p>
-            </div>
-          </div>
+          </section>
         )}
 
       {/* =====================================================
